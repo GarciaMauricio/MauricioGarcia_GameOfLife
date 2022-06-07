@@ -361,6 +361,7 @@ namespace MauricioGarcia_GameOfLife
             return count;
         }
 
+        //New Click
         private void New_Click(object sender, EventArgs e)
         {
             for (int y = 0; y < universe.GetLength(1); y++)
