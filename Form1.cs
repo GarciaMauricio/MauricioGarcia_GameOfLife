@@ -106,7 +106,6 @@ namespace MauricioGarcia_GameOfLife
         {
             NextGeneration();
         }
-
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             // Calculate the width and height of each cell in pixels
@@ -135,7 +134,6 @@ namespace MauricioGarcia_GameOfLife
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     // A rectangle to represent each cell in pixels
-
                     //Use RectangleF!!! after replacing cellWidth and cellHeight with floats 
                     RectangleF cellRect = RectangleF.Empty;
                     cellRect.X = x * cellWidth;
@@ -226,7 +224,7 @@ namespace MauricioGarcia_GameOfLife
         //File New button( repeats nested for loops, Line 93 ) ( Inside both nested loops set universe[x,y] = false; inside function Invalidate GraphicsPanel!!!)
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            timer.Enabled = false;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
@@ -364,6 +362,7 @@ namespace MauricioGarcia_GameOfLife
         //New Click
         private void New_Click(object sender, EventArgs e)
         {
+            timer.Enabled = false;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
