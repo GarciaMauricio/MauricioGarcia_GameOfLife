@@ -12,11 +12,14 @@ namespace MauricioGarcia_GameOfLife
 {
     public partial class Form1 : Form
     {
+        //UniSize
+        static int size = 50;
+
         // The universe array
-        bool[,] universe = new bool[30, 30];
+        bool[,] universe = new bool[size, size];
 
         //Created ScratchPad here...
-        bool[,] ScratchPad = new bool[30, 30];
+        bool[,] ScratchPad = new bool[size, size];
 
         // Drawing colors
         Color LColor = Color.Black;
@@ -88,7 +91,7 @@ namespace MauricioGarcia_GameOfLife
             universe = ScratchPad;
             ScratchPad = hold;
             //2nd time the NextGeneration executes just clear out anything in the ScratchPad that shouldn't be turned on
-            bool[,] Empty = new bool[30, 30];
+            bool[,] Empty = new bool[size, size];
             ScratchPad = Empty;
 
             // Increment generation count

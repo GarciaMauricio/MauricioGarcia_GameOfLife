@@ -26,6 +26,8 @@ namespace MauricioGarcia_GameOfLife
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
+        /// 
+        /// Exept for accidental event initialized that needs deletio
         /// </summary>
         private void InitializeComponent()
         {
@@ -48,17 +50,17 @@ namespace MauricioGarcia_GameOfLife
             this.randomizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.New = new System.Windows.Forms.ToolStripButton();
-            this.graphicsPanel1 = new MauricioGarcia_GameOfLife.GraphicsPanel();
             this.Open = new System.Windows.Forms.ToolStripButton();
             this.Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+            this.graphicsPanel1 = new MauricioGarcia_GameOfLife.GraphicsPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -97,7 +99,7 @@ namespace MauricioGarcia_GameOfLife
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -185,7 +187,7 @@ namespace MauricioGarcia_GameOfLife
             // 
             this.torisToolStripMenuItem.CheckOnClick = true;
             this.torisToolStripMenuItem.Name = "torisToolStripMenuItem";
-            this.torisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.torisToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.torisToolStripMenuItem.Text = "Toroidal";
             this.torisToolStripMenuItem.Click += new System.EventHandler(this.torisToolStripMenuItem_Click);
             // 
@@ -218,6 +220,41 @@ namespace MauricioGarcia_GameOfLife
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // New
+            // 
+            this.New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.New.Image = ((System.Drawing.Image)(resources.GetObject("New.Image")));
+            this.New.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.New.Name = "New";
+            this.New.Size = new System.Drawing.Size(23, 22);
+            this.New.Text = "New";
+            this.New.ToolTipText = "New";
+            this.New.Click += new System.EventHandler(this.New_Click);
+            // 
+            // Open
+            // 
+            this.Open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Open.Image = ((System.Drawing.Image)(resources.GetObject("Open.Image")));
+            this.Open.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Open.Name = "Open";
+            this.Open.Size = new System.Drawing.Size(23, 22);
+            this.Open.Text = "Open";
+            this.Open.ToolTipText = "Open";
+            // 
+            // Save
+            // 
+            this.Save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Save.Image = ((System.Drawing.Image)(resources.GetObject("Save.Image")));
+            this.Save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(23, 22);
+            this.Save.Text = "Save";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
@@ -245,6 +282,11 @@ namespace MauricioGarcia_GameOfLife
             this.toolStripButton3.Text = "Next";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -261,17 +303,6 @@ namespace MauricioGarcia_GameOfLife
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
             // 
-            // New
-            // 
-            this.New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.New.Image = ((System.Drawing.Image)(resources.GetObject("New.Image")));
-            this.New.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.New.Name = "New";
-            this.New.Size = new System.Drawing.Size(23, 22);
-            this.New.Text = "New";
-            this.New.ToolTipText = "New";
-            this.New.Click += new System.EventHandler(this.New_Click);
-            // 
             // graphicsPanel1
             // 
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
@@ -282,35 +313,6 @@ namespace MauricioGarcia_GameOfLife
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
-            // 
-            // Open
-            // 
-            this.Open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Open.Image = ((System.Drawing.Image)(resources.GetObject("Open.Image")));
-            this.Open.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Open.Name = "Open";
-            this.Open.Size = new System.Drawing.Size(23, 22);
-            this.Open.Text = "Open";
-            this.Open.ToolTipText = "Open";
-            // 
-            // Save
-            // 
-            this.Save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Save.Image = ((System.Drawing.Image)(resources.GetObject("Save.Image")));
-            this.Save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(23, 22);
-            this.Save.Text = "Save";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // Form1
             // 
