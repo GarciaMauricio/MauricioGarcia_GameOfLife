@@ -31,6 +31,7 @@ namespace MauricioGarcia_GameOfLife
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,9 +62,13 @@ namespace MauricioGarcia_GameOfLife
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.graphicsPanel1 = new MauricioGarcia_GameOfLife.GraphicsPanel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -306,6 +311,7 @@ namespace MauricioGarcia_GameOfLife
             // graphicsPanel1
             // 
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
+            this.graphicsPanel1.ContextMenuStrip = this.contextMenuStrip1;
             this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphicsPanel1.Location = new System.Drawing.Point(0, 49);
             this.graphicsPanel1.Name = "graphicsPanel1";
@@ -313,6 +319,26 @@ namespace MauricioGarcia_GameOfLife
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewToolStripMenuItem,
+            this.colorsToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 48);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // colorsToolStripMenuItem
+            // 
+            this.colorsToolStripMenuItem.Name = "colorsToolStripMenuItem";
+            this.colorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.colorsToolStripMenuItem.Text = "Colors";
             // 
             // Form1
             // 
@@ -332,6 +358,7 @@ namespace MauricioGarcia_GameOfLife
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,6 +395,9 @@ namespace MauricioGarcia_GameOfLife
         private System.Windows.Forms.ToolStripButton Save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorsToolStripMenuItem;
     }
 }
 

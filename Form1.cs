@@ -13,7 +13,7 @@ namespace MauricioGarcia_GameOfLife
     public partial class Form1 : Form
     {
         //UniSize
-        static int size = 50;
+        static int size = 20;
 
         // The universe array
         bool[,] universe = new bool[size, size];
@@ -173,6 +173,7 @@ namespace MauricioGarcia_GameOfLife
 
             // Cleaning up pens and brushes
             gridPen.Dispose();
+            boldPen.Dispose();
             cellBrush.Dispose();
         }
 
