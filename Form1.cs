@@ -260,7 +260,7 @@ namespace MauricioGarcia_GameOfLife
             {
                 torisToolStripMenuItem.Checked = true;
             }
-
+            graphicsPanel1.Invalidate();
         }
         private int CountNeighborsFinite(int x, int y)
         {
@@ -318,6 +318,7 @@ namespace MauricioGarcia_GameOfLife
             {
                 finiteToolStripMenuItem.Checked = true;
             }
+            graphicsPanel1.Invalidate();
         }
         private int CountNeighborsToroidal(int x, int y)
         {
