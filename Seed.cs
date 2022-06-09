@@ -16,5 +16,16 @@ namespace MauricioGarcia_GameOfLife
         {
             InitializeComponent();
         }
+
+        //Get the number and set the number inside the NumericUpDown Box
+        public int GetSeed()
+        {
+            return (int)numericUpDown1.Value;
+        }
+
+        public void SetSeed(int Vseed)
+        {
+            //numericUpDown1.Value = num/* num = seed number */;
+        }
     }
 }

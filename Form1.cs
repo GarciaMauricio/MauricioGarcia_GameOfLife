@@ -13,13 +13,14 @@ namespace MauricioGarcia_GameOfLife
     public partial class Form1 : Form
     {
         //UniSize
-        static int size = 20;
+        static int width = 10;
+        static int height = 10;
 
         // The universe array
-        bool[,] universe = new bool[size, size];
+        bool[,] universe = new bool[width, height];
 
         //Created ScratchPad here...
-        bool[,] ScratchPad = new bool[size, size];
+        bool[,] ScratchPad = new bool[width, height];
 
         // Drawing colors
         Color panelColor = Color.White;
@@ -93,7 +94,7 @@ namespace MauricioGarcia_GameOfLife
             universe = ScratchPad;
             ScratchPad = hold;
             //2nd time the NextGeneration executes just clear out anything in the ScratchPad that shouldn't be turned on
-            bool[,] Empty = new bool[size, size];
+            bool[,] Empty = new bool[width, height];
             ScratchPad = Empty;
 
             // Increment generation count
@@ -229,6 +230,10 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+        //Open Click
+        //Save Click
+
+
         //Start timer button( starts the timer to true, Line 35 )
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -277,6 +282,11 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+        //Open Button
+        //Import Button
+        //Save Button
+
+
         //Exit Button
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -286,6 +296,11 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________VIEW TAB____________________*/
+        //HUD View
+        //Neighbor Count View
+        //Grid View
+
+
         //Finite View
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -409,9 +424,15 @@ namespace MauricioGarcia_GameOfLife
             //Created Dialog Box, Instanciated it
             Seed sd = new Seed();
 
+            //Set Seed num
+            //sd.SetSeed( seed variable );
+
             if(DialogResult.OK == sd.ShowDialog()/*Show dialog box, ( modeless/tool window ) use only: Show*/)
             {
-                
+                //seed variable = sd.GetSeed();
+
+                //Remember to always invalidate
+                graphicsPanel1.Invalidate();
             }
         }
 
@@ -468,11 +489,22 @@ namespace MauricioGarcia_GameOfLife
         {
             Options opns = new Options();
 
+            opns.SetMilliSec(timer.Interval);
+            opns.SetWidth(width);
+            opns.SetHeight(height);
+
             if(DialogResult.OK == opns.ShowDialog())
             {
+                timer.Interval = opns.GetMilliSec();
+                width = opns.GetWidth();
+                height = opns.GetHeight();
 
+                graphicsPanel1.Invalidate();
             }
         }
+
+        //Reset
+        //Reload
 
 
 

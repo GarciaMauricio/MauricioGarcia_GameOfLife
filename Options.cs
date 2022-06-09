@@ -16,5 +16,32 @@ namespace MauricioGarcia_GameOfLife
         {
             InitializeComponent();
         }
+
+        public int GetMilliSec()
+        {
+            return (int)numericUpDown1.Value;
+        }
+        public void SetMilliSec(int time)
+        {
+            numericUpDown1.Value = time;
+        }
+
+        public int GetWidth()
+        {
+            return (int)numericUpDown2.Value;
+        }
+        public void SetWidth(int w)
+        {
+            numericUpDown2.Value = w;
+        }
+
+        public int GetHeight()
+        {
+            return (int)numericUpDown3.Value;
+        }
+        public void SetHeight(int h)
+        {
+            numericUpDown3.Value = h;
+        }
     }
 }
