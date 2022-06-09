@@ -406,7 +406,13 @@ namespace MauricioGarcia_GameOfLife
         //Seed
         private void seedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Created Dialog Box, Instanciated it
+            Seed sd = new Seed();
 
+            if(DialogResult.OK == sd.ShowDialog()/*Show dialog box, ( modeless/tool window ) use only: Show*/)
+            {
+                
+            }
         }
 
 
@@ -455,6 +461,17 @@ namespace MauricioGarcia_GameOfLife
         private void gridX10ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //Options Tab
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Options opns = new Options();
+
+            if(DialogResult.OK == opns.ShowDialog())
+            {
+
+            }
         }
 
 

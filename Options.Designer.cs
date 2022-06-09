@@ -1,7 +1,7 @@
 ﻿
 namespace MauricioGarcia_GameOfLife
 {
-    partial class Seed
+    partial class Options
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace MauricioGarcia_GameOfLife
         {
             this.SuspendLayout();
             // 
-            // Seed
+            // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -39,8 +39,8 @@ namespace MauricioGarcia_GameOfLife
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Seed";
-            this.Text = "Seed";
+            this.Name = "Options";
+            this.Text = "Options";
             this.ResumeLayout(false);
 
         }
