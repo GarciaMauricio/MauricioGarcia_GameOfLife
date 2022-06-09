@@ -496,14 +496,14 @@ namespace MauricioGarcia_GameOfLife
             if(DialogResult.OK == opns.ShowDialog())
             {
                 timer.Interval = opns.GetMilliSec();
-                graphicsPanel1.Invalidate();
-
+               
                 width = opns.GetWidth();
-                graphicsPanel1.Invalidate();
 
                 height = opns.GetHeight();
-                graphicsPanel1.Invalidate();
 
+                universe = new bool[width, height];
+
+                graphicsPanel1.Invalidate();
             }
         }
 
