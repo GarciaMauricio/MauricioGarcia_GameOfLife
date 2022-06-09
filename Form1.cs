@@ -22,6 +22,7 @@ namespace MauricioGarcia_GameOfLife
         bool[,] ScratchPad = new bool[size, size];
 
         // Drawing colors
+        Color panelColor = Color.White;
         Color LColor = Color.Black;
         Color gridColor = Color.Black;
         Color cellColor = Color.Black;
@@ -59,6 +60,7 @@ namespace MauricioGarcia_GameOfLife
                     {
                         count = CountNeighborsToroidal(x, y);
                     }
+
                     //Apply the rules here
                     if (universe[x, y] == true)
                     {
@@ -112,8 +114,8 @@ namespace MauricioGarcia_GameOfLife
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             // Calculate the width and height of each cell in pixels
-        //FLOATS MAKE PROGRAM MUCH BETTER( REPLACE INTS ) 
-        //CONVERT TO FLOATS!!!
+            //FLOATS MAKE PROGRAM MUCH BETTER( REPLACE INTS ) 
+            //CONVERT TO FLOATS!!!
             //( Calculating the width and the height of each window )
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
             float cellWidth = graphicsPanel1.ClientSize.Width / (float)universe.GetLength(0);
@@ -129,8 +131,11 @@ namespace MauricioGarcia_GameOfLife
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
 
+            //Painting BackColor of the Panel
+            graphicsPanel1.BackColor = panelColor;
+
             // Iterate through the universe in the y, top to bottom
-                //started with y top then x on bottom, not necessary, this just moves through it the way westerns read
+            //started with y top then x on bottom, not necessary, this just moves through it the way westerns read
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
@@ -143,7 +148,7 @@ namespace MauricioGarcia_GameOfLife
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
-                    
+
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -153,19 +158,19 @@ namespace MauricioGarcia_GameOfLife
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-                    
+
                     if (x % 10 == 0)
-                    {                        
+                    {
                         int _y = universe.GetLength(1);
-                        Point point1 = new Point( (int)(x * cellWidth), 0 );
-                        Point point2 = new Point( (int)(x * cellWidth), (int)( (_y + 1) * (cellHeight) ) );
+                        Point point1 = new Point((int)(x * cellWidth), 0);
+                        Point point2 = new Point((int)(x * cellWidth), (int)((_y + 1) * (cellHeight)));
                         e.Graphics.DrawLine(boldPen, point1, point2);
                     }
                     if (y % 10 == 0)
                     {
                         int _x = universe.GetLength(0);
-                        Point point1 = new Point(0,(int)(y * cellHeight));
-                        Point point2 = new Point( (int)( (_x + 1) * (cellWidth) ), (int)(y * cellHeight) );
+                        Point point1 = new Point(0, (int)(y * cellHeight));
+                        Point point2 = new Point((int)((_x + 1) * (cellWidth)), (int)(y * cellHeight));
                         e.Graphics.DrawLine(boldPen, point1, point2);
                     }
                 }
@@ -182,7 +187,7 @@ namespace MauricioGarcia_GameOfLife
             // If the left mouse button was clicked
             if (e.Button == MouseButtons.Left)
             {
-            //Convert to FLOATS!!! AS WELL!!!
+                //Convert to FLOATS!!! AS WELL!!!
                 // Calculate the width and height of each cell in pixels
                 float cellWidth = graphicsPanel1.ClientSize.Width / (float)universe.GetLength(0);
                 float cellHeight = graphicsPanel1.ClientSize.Height / (float)universe.GetLength(1);
@@ -204,10 +209,33 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+
+        /*____________________PANEL BAR____________________*/
+        //New Click
+        private void New_Click(object sender, EventArgs e)
+        {
+            timer.Enabled = false;
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    universe[x, y] = false;
+                }
+            }
+            generations = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            graphicsPanel1.Invalidate();
+        }
+
+
         //Start timer button( starts the timer to true, Line 35 )
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             timer.Enabled = true;
+            toolStripButton1.Enabled = false;
+            toolStripButton2.Enabled = true;
+            toolStripButton3.Enabled = false;
         }
 
 
@@ -215,6 +243,9 @@ namespace MauricioGarcia_GameOfLife
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
+            toolStripButton1.Enabled = true;
+            toolStripButton2.Enabled = false;
+            toolStripButton3.Enabled = true;
         }
 
 
@@ -225,7 +256,10 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
-        //File New button( repeats nested for loops, Line 93 ) ( Inside both nested loops set universe[x,y] = false; inside function Invalidate GraphicsPanel!!!)
+
+        /*____________________FILE TAB____________________*/
+        //File New button( repeats nested for loops, Line 93 )
+        //( Inside both nested loops set universe[x,y] = false; inside function Invalidate GraphicsPanel!!!)
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
@@ -250,6 +284,8 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+
+        /*____________________VIEW TAB____________________*/
         //Finite View
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -340,12 +376,12 @@ namespace MauricioGarcia_GameOfLife
                     // if xCheck is less than 0 then set to xLen - 1
                     if (xCheck < 0)
                     {
-                        xCheck = xLen -1;
+                        xCheck = xLen - 1;
                     }
                     // if yCheck is less than 0 then set to yLen - 1
                     if (yCheck < 0)
                     {
-                        yCheck = yLen -1;
+                        yCheck = yLen - 1;
                     }
                     // if xCheck is greater than or equal too xLen then set to 0
                     if (xCheck >= xLen)
@@ -364,21 +400,98 @@ namespace MauricioGarcia_GameOfLife
             return count;
         }
 
-        //New Click
-        private void New_Click(object sender, EventArgs e)
+
+
+        /*____________________RANDOMIZE TAB____________________*/
+        //Seed
+        private void seedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timer.Enabled = false;
-            for (int y = 0; y < universe.GetLength(1); y++)
-            {
-                // Iterate through the universe in the x, left to right
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-                    universe[x, y] = false;
-                }
-            }
-            generations = 0;
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
-            graphicsPanel1.Invalidate();
+
         }
+
+
+        //Current Seed
+
+
+
+        //Time
+
+
+
+        /*____________________SETTINGS TAB____________________*/
+        //Changing Background Color
+        private void backgroundToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //Creating Instance of the Dialog Box
+            ColorDialog BkGrnd = new ColorDialog();
+
+            //Show Current Color of the object being customized ( need property )
+            //To get Property and set it to the object color:
+            BkGrnd.Color = panelColor;
+
+            //Most important thing to know about the box, is to know how the user closed it, whether it was an okay change of a cancel
+            //The resolve:
+            if (DialogResult.OK == BkGrnd.ShowDialog()/*Showing the Dialog Box*/)
+            {
+                panelColor = BkGrnd.Color;
+                graphicsPanel1.Invalidate();
+            }
+            BkGrnd.Dispose();
+        }
+
+        //Changing Cell Color
+        private void cellsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Changing Grid Color
+        private void gridToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Changing Grid x10 Color
+        private void gridX10ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        /*________________________________________RIGHT CLICK________________________________________*/
+
+
+
+        /*____________________VIEW TAB____________________*/
+        //HUD
+
+
+        //Neighbor Count
+
+
+        //Grid
+
+
+        //Finite
+
+
+        //Toroidal
+
+
+
+        /*____________________COLORS TAB____________________*/
+        //BackGround Color
+
+
+        //Cells
+
+
+        //Grid
+
+
+        //Grid x10
+
+
     }
 }
