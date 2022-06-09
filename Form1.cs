@@ -13,8 +13,8 @@ namespace MauricioGarcia_GameOfLife
     public partial class Form1 : Form
     {
         //UniSize
-        static int width = 10;
-        static int height = 10;
+        static int width = 5;
+        static int height = 5;
 
         // The universe array
         bool[,] universe = new bool[width, height];
@@ -496,10 +496,14 @@ namespace MauricioGarcia_GameOfLife
             if(DialogResult.OK == opns.ShowDialog())
             {
                 timer.Interval = opns.GetMilliSec();
-                width = opns.GetWidth();
-                height = opns.GetHeight();
-
                 graphicsPanel1.Invalidate();
+
+                width = opns.GetWidth();
+                graphicsPanel1.Invalidate();
+
+                height = opns.GetHeight();
+                graphicsPanel1.Invalidate();
+
             }
         }
 
