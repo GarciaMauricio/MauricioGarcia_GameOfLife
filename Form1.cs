@@ -329,6 +329,7 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+
         //Open Button
         //Import Button
         //Save Button
@@ -493,19 +494,35 @@ namespace MauricioGarcia_GameOfLife
         //Seed
         private void seedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Created Dialog Box, Instanciated it
             Seed sd = new Seed();
 
-            //Set Seed num
-            //sd.SetSeed( seed variable );
+            sd.SetSeed(value);
 
+            //Created Dialog Box, Instanciated it
             if (DialogResult.OK == sd.ShowDialog()/*Show dialog box, ( modeless/tool window ) use only: Show*/)
             {
-                //seed variable = sd.GetSeed();
+                value = sd.GetSeed();
 
                 //Remember to always invalidate
-                graphicsPanel1.Invalidate();
+                for (int y1 = 0; y1 < universe.GetLength(1); y1++)
+                {
+                    for (int x1 = 0; x1 < universe.GetLength(0); x1++)
+                    {
+                        //Randomize ( NOT COMPLETED )
+                        value = rndseed.Next(0, 2);
+                        if (value == 0)
+                        {
+                            universe[x1, y1] = true;
+                        }
+                        else
+                        {
+                            universe[x1, y1] = false;
+                        }
+                    }
+                }
+                toolStripStatusSeed.Text = "Seed = " + value.ToString();
             }
+            graphicsPanel1.Invalidate();
         }
 
 
@@ -598,7 +615,6 @@ namespace MauricioGarcia_GameOfLife
                 {
                     timer.Interval = opns.GetMilliSec();
                     toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
-                    graphicsPanel1.Invalidate();
                 }
                 if (opns.GetWidth() != width || opns.GetHeight() != height)
                 {
@@ -606,9 +622,9 @@ namespace MauricioGarcia_GameOfLife
                     height = opns.GetHeight();
                     universe = new bool[width, height];
                     ScratchPad = new bool[width, height];
-                    graphicsPanel1.Invalidate();
                 }
             }
+            graphicsPanel1.Invalidate();
         }
 
         //Reset
