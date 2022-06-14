@@ -16,13 +16,15 @@ namespace MauricioGarcia_GameOfLife
         static int width = 10;
         static int height = 10;
 
+        //Seed
+        Random rndseed = new Random();
+        int value = 0;
 
         // The universe array
         bool[,] universe = new bool[width, height];
 
         //Created ScratchPad here...
         bool[,] ScratchPad = new bool[width, height];
-
 
         // Drawing colors
         Color panelColor = Color.White;
@@ -45,25 +47,23 @@ namespace MauricioGarcia_GameOfLife
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer not running
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
+
+            //Seed Display
+            value = rndseed.Next(int.MinValue, int.MaxValue);
+            toolStripStatusSeed.Text = "Seed = " + value.ToString();
         }
 
         // Calculate the next generation of cells
         private void NextGeneration()
         {
+            //Live cell count
             int live = 0;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     //get neighbor count for each living cell, option
-
-                    if (universe[x, y] == true)
-                    {
-                        live++;
-                    }
-
                     int count = CountNeighborsFinite(x, y); // default
-
                     if (finiteToolStripMenuItem.Checked == true)
                     {
                         count = CountNeighborsFinite(x, y);
@@ -109,15 +109,25 @@ namespace MauricioGarcia_GameOfLife
             bool[,] Empty = new bool[width, height];
             ScratchPad = Empty;
 
-
             // Increment generation count
             generations++;
 
-            // Update status strip generations
+            // Update status strips
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
+
+            //Real time Update Live Cell Count
+            for (int yPosition = 0; yPosition < universe.GetLength(1); yPosition++)
+            {
+                for (int xPosition = 0; xPosition < universe.GetLength(0); xPosition++)
+                {
+                    if (universe[xPosition, yPosition] == true)
+                    {
+                        live++;
+                    }
+                }
+            }
             toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
-            toolStripStatusSeed.Text = "Seed = ";
 
             //Invalidate graphicsPanel1
             graphicsPanel1.Invalidate();
@@ -196,9 +206,6 @@ namespace MauricioGarcia_GameOfLife
                 }
             }
 
-            //Seed
-
-
             //HUD
 
 
@@ -227,6 +234,7 @@ namespace MauricioGarcia_GameOfLife
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];
 
+                //Live cell count
                 int live = 0;
                 for (int yPosition = 0; yPosition < universe.GetLength(1); yPosition++)
                 {
@@ -239,10 +247,11 @@ namespace MauricioGarcia_GameOfLife
                         }
                     }
                 }
-
                 toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
+
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
+
                 //CALL INVALIDATE WHEN UPDATING, CLICKING, TURNING ON OR OFF THINGS
                 //NEVER PLACE INVALIDATE INSIDE YOUR PAINT
             }
