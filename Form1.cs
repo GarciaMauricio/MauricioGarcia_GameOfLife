@@ -13,14 +13,16 @@ namespace MauricioGarcia_GameOfLife
     public partial class Form1 : Form
     {
         //UniSize
-        static int width = 5;
-        static int height = 5;
+        static int width = 10;
+        static int height = 10;
+
 
         // The universe array
         bool[,] universe = new bool[width, height];
 
         //Created ScratchPad here...
         bool[,] ScratchPad = new bool[width, height];
+
 
         // Drawing colors
         Color panelColor = Color.White;
@@ -42,17 +44,26 @@ namespace MauricioGarcia_GameOfLife
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer not running
+            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
         }
 
         // Calculate the next generation of cells
         private void NextGeneration()
         {
+            int live = 0;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     //get neighbor count for each living cell, option
+
+                    if (universe[x, y] == true)
+                    {
+                        live++;
+                    }
+
                     int count = CountNeighborsFinite(x, y); // default
+
                     if (finiteToolStripMenuItem.Checked == true)
                     {
                         count = CountNeighborsFinite(x, y);
@@ -88,6 +99,7 @@ namespace MauricioGarcia_GameOfLife
                 }
             }
 
+
             //Copy what is in the ScratchPad to the universe
             //( Swap them )
             bool[,] hold = universe;
@@ -97,15 +109,21 @@ namespace MauricioGarcia_GameOfLife
             bool[,] Empty = new bool[width, height];
             ScratchPad = Empty;
 
+
             // Increment generation count
             generations++;
 
             // Update status strip generations
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
+            toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
+            toolStripStatusSeed.Text = "Seed = ";
 
             //Invalidate graphicsPanel1
             graphicsPanel1.Invalidate();
         }
+
+
 
         // The event called by the timer every Interval milliseconds.
         private void Timer_Tick(object sender, EventArgs e)
@@ -150,6 +168,7 @@ namespace MauricioGarcia_GameOfLife
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
 
+                    
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -177,6 +196,12 @@ namespace MauricioGarcia_GameOfLife
                 }
             }
 
+            //Seed
+
+
+            //HUD
+
+
             // Cleaning up pens and brushes
             gridPen.Dispose();
             boldPen.Dispose();
@@ -202,6 +227,20 @@ namespace MauricioGarcia_GameOfLife
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];
 
+                int live = 0;
+                for (int yPosition = 0; yPosition < universe.GetLength(1); yPosition++)
+                {
+                    // Iterate through the universe in the x, left to right
+                    for (int xPosition = 0; xPosition < universe.GetLength(0); xPosition++)
+                    {
+                        if (universe[xPosition, yPosition] == true)
+                        {
+                            live++;
+                        }
+                    }
+                }
+
+                toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
                 //CALL INVALIDATE WHEN UPDATING, CLICKING, TURNING ON OR OFF THINGS
@@ -215,6 +254,7 @@ namespace MauricioGarcia_GameOfLife
         //New Click
         private void New_Click(object sender, EventArgs e)
         {
+            int live = 0;
             timer.Enabled = false;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -226,6 +266,7 @@ namespace MauricioGarcia_GameOfLife
             }
             generations = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
             graphicsPanel1.Invalidate();
         }
 
@@ -238,9 +279,6 @@ namespace MauricioGarcia_GameOfLife
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             timer.Enabled = true;
-            toolStripButton1.Enabled = false;
-            toolStripButton2.Enabled = true;
-            toolStripButton3.Enabled = false;
         }
 
 
@@ -248,9 +286,6 @@ namespace MauricioGarcia_GameOfLife
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
-            toolStripButton1.Enabled = true;
-            toolStripButton2.Enabled = false;
-            toolStripButton3.Enabled = true;
         }
 
 
@@ -267,7 +302,9 @@ namespace MauricioGarcia_GameOfLife
         //( Inside both nested loops set universe[x,y] = false; inside function Invalidate GraphicsPanel!!!)
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int live = 0;
             timer.Enabled = false;
+
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
@@ -278,6 +315,7 @@ namespace MauricioGarcia_GameOfLife
             }
             generations = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
             graphicsPanel1.Invalidate();
         }
 
@@ -306,10 +344,14 @@ namespace MauricioGarcia_GameOfLife
         {
             if (finiteToolStripMenuItem.Checked == true)
             {
+                finiteToolStripMenuItemRight.Checked = true;
                 torisToolStripMenuItem.Checked = false;
+                toroidalToolStripMenuItemRight.Checked = false;
             }
-            else if (finiteToolStripMenuItem.Checked == false)
+            else
             {
+                finiteToolStripMenuItemRight.Checked = false;
+                toroidalToolStripMenuItemRight.Checked = true;
                 torisToolStripMenuItem.Checked = true;
             }
             graphicsPanel1.Invalidate();
@@ -364,11 +406,15 @@ namespace MauricioGarcia_GameOfLife
         {
             if (torisToolStripMenuItem.Checked == true)
             {
+                toroidalToolStripMenuItemRight.Checked = true;
                 finiteToolStripMenuItem.Checked = false;
+                finiteToolStripMenuItemRight.Checked = false;
             }
-            else if (torisToolStripMenuItem.Checked == false)
+            else
             {
+                toroidalToolStripMenuItemRight.Checked = false;
                 finiteToolStripMenuItem.Checked = true;
+                finiteToolStripMenuItemRight.Checked = true;
             }
             graphicsPanel1.Invalidate();
         }
@@ -427,7 +473,7 @@ namespace MauricioGarcia_GameOfLife
             //Set Seed num
             //sd.SetSeed( seed variable );
 
-            if(DialogResult.OK == sd.ShowDialog()/*Show dialog box, ( modeless/tool window ) use only: Show*/)
+            if (DialogResult.OK == sd.ShowDialog()/*Show dialog box, ( modeless/tool window ) use only: Show*/)
             {
                 //seed variable = sd.GetSeed();
 
@@ -469,19 +515,46 @@ namespace MauricioGarcia_GameOfLife
         //Changing Cell Color
         private void cellsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ColorDialog cell = new ColorDialog();
 
+            cell.Color = cellColor;
+
+            if (DialogResult.OK == cell.ShowDialog())
+            {
+                cellColor = cell.Color;
+                graphicsPanel1.Invalidate();
+            }
+            cell.Dispose();
         }
 
         //Changing Grid Color
         private void gridToolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            ColorDialog grid = new ColorDialog();
 
+            grid.Color = gridColor;
+
+            if (DialogResult.OK == grid.ShowDialog())
+            {
+                gridColor = grid.Color;
+                graphicsPanel1.Invalidate();
+            }
+            grid.Dispose();
         }
 
         //Changing Grid x10 Color
         private void gridX10ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ColorDialog Gx10 = new ColorDialog();
 
+            Gx10.Color = LColor;
+
+            if (DialogResult.OK == Gx10.ShowDialog())
+            {
+                LColor = Gx10.Color;
+                graphicsPanel1.Invalidate();
+            }
+            Gx10.Dispose();
         }
 
         //Options Tab
@@ -493,17 +566,22 @@ namespace MauricioGarcia_GameOfLife
             opns.SetWidth(width);
             opns.SetHeight(height);
 
-            if(DialogResult.OK == opns.ShowDialog())
+            if (DialogResult.OK == opns.ShowDialog())
             {
-                timer.Interval = opns.GetMilliSec();
-               
-                width = opns.GetWidth();
-
-                height = opns.GetHeight();
-
-                universe = new bool[width, height];
-
-                graphicsPanel1.Invalidate();
+                if (opns.GetMilliSec() != timer.Interval)
+                {
+                    timer.Interval = opns.GetMilliSec();
+                    toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
+                    graphicsPanel1.Invalidate();
+                }
+                if (opns.GetWidth() != width || opns.GetHeight() != height)
+                {
+                    width = opns.GetWidth();
+                    height = opns.GetHeight();
+                    universe = new bool[width, height];
+                    ScratchPad = new bool[width, height];
+                    graphicsPanel1.Invalidate();
+                }
             }
         }
 
@@ -527,11 +605,40 @@ namespace MauricioGarcia_GameOfLife
 
 
         //Finite
-
+        private void finiteToolStripMenuItemRight_Click(object sender, EventArgs e)
+        {
+            if (finiteToolStripMenuItemRight.Checked == true)
+            {
+                finiteToolStripMenuItem.Checked = true;
+                toroidalToolStripMenuItemRight.Checked = false;
+                torisToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                finiteToolStripMenuItem.Checked = false;
+                torisToolStripMenuItem.Checked = true;
+                toroidalToolStripMenuItemRight.Checked = true;
+            }
+            graphicsPanel1.Invalidate();
+        }
 
         //Toroidal
-
-
+        private void toroidalToolStripMenuItemRight_Click(object sender, EventArgs e)
+        {
+            if (toroidalToolStripMenuItemRight.Checked == true)
+            {
+                torisToolStripMenuItem.Checked = true;
+                finiteToolStripMenuItem.Checked = false;
+                finiteToolStripMenuItemRight.Checked = false;
+            }
+            else
+            {
+                torisToolStripMenuItem.Checked = false;
+                finiteToolStripMenuItem.Checked = true;
+                finiteToolStripMenuItemRight.Checked = true;
+            }
+            graphicsPanel1.Invalidate();
+        }
 
         /*____________________COLORS TAB____________________*/
         //BackGround Color

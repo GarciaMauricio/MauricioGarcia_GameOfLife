@@ -75,13 +75,16 @@ namespace MauricioGarcia_GameOfLife
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusInterval = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelAlive = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hUDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighborCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.finiteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toroidalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.finiteToolStripMenuItemRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.toroidalToolStripMenuItemRight = new System.Windows.Forms.ToolStripMenuItem();
             this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cellsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +130,7 @@ namespace MauricioGarcia_GameOfLife
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -408,7 +411,6 @@ namespace MauricioGarcia_GameOfLife
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.Enabled = false;
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
@@ -433,7 +435,10 @@ namespace MauricioGarcia_GameOfLife
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelGenerations});
+            this.toolStripStatusLabelGenerations,
+            this.toolStripStatusInterval,
+            this.toolStripStatusLabelAlive,
+            this.toolStripStatusSeed});
             this.statusStrip1.Location = new System.Drawing.Point(0, 639);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(684, 22);
@@ -445,6 +450,24 @@ namespace MauricioGarcia_GameOfLife
             this.toolStripStatusLabelGenerations.Name = "toolStripStatusLabelGenerations";
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
+            // 
+            // toolStripStatusInterval
+            // 
+            this.toolStripStatusInterval.Name = "toolStripStatusInterval";
+            this.toolStripStatusInterval.Size = new System.Drawing.Size(66, 17);
+            this.toolStripStatusInterval.Text = "Interval = 0";
+            // 
+            // toolStripStatusLabelAlive
+            // 
+            this.toolStripStatusLabelAlive.Name = "toolStripStatusLabelAlive";
+            this.toolStripStatusLabelAlive.Size = new System.Drawing.Size(53, 17);
+            this.toolStripStatusLabelAlive.Text = "Alive = 0";
+            // 
+            // toolStripStatusSeed
+            // 
+            this.toolStripStatusSeed.Name = "toolStripStatusSeed";
+            this.toolStripStatusSeed.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusSeed.Text = "Seed = 0";
             // 
             // contextMenuStrip1
             // 
@@ -460,8 +483,8 @@ namespace MauricioGarcia_GameOfLife
             this.hUDToolStripMenuItem,
             this.neighborCountToolStripMenuItem,
             this.gridToolStripMenuItem1,
-            this.finiteToolStripMenuItem1,
-            this.toroidalToolStripMenuItem});
+            this.finiteToolStripMenuItemRight,
+            this.toroidalToolStripMenuItemRight});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.viewToolStripMenuItem.Text = "View";
@@ -493,21 +516,23 @@ namespace MauricioGarcia_GameOfLife
             this.gridToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.gridToolStripMenuItem1.Text = "Grid";
             // 
-            // finiteToolStripMenuItem1
+            // finiteToolStripMenuItemRight
             // 
-            this.finiteToolStripMenuItem1.Checked = true;
-            this.finiteToolStripMenuItem1.CheckOnClick = true;
-            this.finiteToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.finiteToolStripMenuItem1.Name = "finiteToolStripMenuItem1";
-            this.finiteToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
-            this.finiteToolStripMenuItem1.Text = "Finite";
+            this.finiteToolStripMenuItemRight.Checked = true;
+            this.finiteToolStripMenuItemRight.CheckOnClick = true;
+            this.finiteToolStripMenuItemRight.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.finiteToolStripMenuItemRight.Name = "finiteToolStripMenuItemRight";
+            this.finiteToolStripMenuItemRight.Size = new System.Drawing.Size(160, 22);
+            this.finiteToolStripMenuItemRight.Text = "Finite";
+            this.finiteToolStripMenuItemRight.Click += new System.EventHandler(this.finiteToolStripMenuItemRight_Click);
             // 
-            // toroidalToolStripMenuItem
+            // toroidalToolStripMenuItemRight
             // 
-            this.toroidalToolStripMenuItem.CheckOnClick = true;
-            this.toroidalToolStripMenuItem.Name = "toroidalToolStripMenuItem";
-            this.toroidalToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.toroidalToolStripMenuItem.Text = "Toroidal";
+            this.toroidalToolStripMenuItemRight.CheckOnClick = true;
+            this.toroidalToolStripMenuItemRight.Name = "toroidalToolStripMenuItemRight";
+            this.toroidalToolStripMenuItemRight.Size = new System.Drawing.Size(160, 22);
+            this.toroidalToolStripMenuItemRight.Text = "Toroidal";
+            this.toroidalToolStripMenuItemRight.Click += new System.EventHandler(this.toroidalToolStripMenuItemRight_Click);
             // 
             // colorsToolStripMenuItem
             // 
@@ -614,8 +639,8 @@ namespace MauricioGarcia_GameOfLife
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toroidalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItemRight;
+        private System.Windows.Forms.ToolStripMenuItem toroidalToolStripMenuItemRight;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hUDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neighborCountToolStripMenuItem;
@@ -637,6 +662,9 @@ namespace MauricioGarcia_GameOfLife
         private System.Windows.Forms.ToolStripMenuItem cellsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem gridX10ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusInterval;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelAlive;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSeed;
     }
 }
 
