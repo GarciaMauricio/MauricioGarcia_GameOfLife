@@ -28,7 +28,7 @@ namespace MauricioGarcia_GameOfLife
 
         // Drawing colors
         Color panelColor = Color.White;
-        Color LColor = Color.Black;
+        Color LineX10Color = Color.Black;
         Color gridColor = Color.Black;
         Color cellColor = Color.Black;
 
@@ -155,7 +155,7 @@ namespace MauricioGarcia_GameOfLife
             Pen gridPen = new Pen(gridColor, 1);
 
 
-            Pen boldPen = new Pen(LColor, 3);
+            Pen boldPen = new Pen(LineX10Color, 3);
 
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
@@ -344,9 +344,26 @@ namespace MauricioGarcia_GameOfLife
 
         /*____________________VIEW TAB____________________*/
         //HUD View
+        
         //Neighbor Count View
-        //Grid View
 
+        //Grid View
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gridToolStripMenuItem.Checked == false)
+            {
+                gridToolStripMenuItem1.Checked = false;
+                gridColor = Color.Transparent;
+                LineX10Color = Color.Transparent;
+            }
+            else
+            {
+                gridToolStripMenuItem1.Checked = true;
+                LineX10Color = Color.Black;
+                gridColor = Color.Black;
+            }
+            graphicsPanel1.Invalidate();
+        }
 
         //Finite View
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -556,11 +573,11 @@ namespace MauricioGarcia_GameOfLife
         {
             ColorDialog Gx10 = new ColorDialog();
 
-            Gx10.Color = LColor;
+            Gx10.Color = LineX10Color;
 
             if (DialogResult.OK == Gx10.ShowDialog())
             {
-                LColor = Gx10.Color;
+                LineX10Color = Gx10.Color;
                 graphicsPanel1.Invalidate();
             }
             Gx10.Dispose();
@@ -611,7 +628,22 @@ namespace MauricioGarcia_GameOfLife
 
 
         //Grid
-
+        private void gridToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (gridToolStripMenuItem1.Checked == false)
+            {
+                gridToolStripMenuItem.Checked = false;
+                gridColor = Color.Transparent;
+                LineX10Color = Color.Transparent;
+            }
+            else
+            {
+                gridToolStripMenuItem.Checked = true;
+                LineX10Color = Color.Black;
+                gridColor = Color.Black;
+            }
+            graphicsPanel1.Invalidate();
+        }
 
         //Finite
         private void finiteToolStripMenuItemRight_Click(object sender, EventArgs e)
@@ -648,6 +680,8 @@ namespace MauricioGarcia_GameOfLife
             }
             graphicsPanel1.Invalidate();
         }
+
+
 
         /*____________________COLORS TAB____________________*/
         //BackGround Color
