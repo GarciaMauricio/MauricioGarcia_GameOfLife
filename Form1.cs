@@ -629,8 +629,36 @@ namespace MauricioGarcia_GameOfLife
         }
 
         //Reset
-        //Reload
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            value = Properties.Settings.Default.Seed;
+            panelColor = Properties.Settings.Default.BackgroundColor;
+            cellColor = Properties.Settings.Default.CellColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            LineX10Color = Properties.Settings.Default.GridX10Color;
+            timer.Interval = Properties.Settings.Default.Timer;
+            width = Properties.Settings.Default.Width;
+            height = Properties.Settings.Default.Height;
 
+            graphicsPanel1.Invalidate();
+        }
+
+        //Reload
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reload();
+            value = Properties.Settings.Default.Seed;
+            panelColor = Properties.Settings.Default.BackgroundColor;
+            cellColor = Properties.Settings.Default.CellColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            LineX10Color = Properties.Settings.Default.GridX10Color;
+            timer.Interval = Properties.Settings.Default.Timer;
+            width = Properties.Settings.Default.Width;
+            height = Properties.Settings.Default.Height;
+
+            graphicsPanel1.Invalidate();
+        }
 
 
         /*________________________________________RIGHT CLICK________________________________________*/
@@ -702,7 +730,10 @@ namespace MauricioGarcia_GameOfLife
 
         /*____________________COLORS TAB____________________*/
         //BackGround Color
-
+        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundToolStripMenuItem1_Click(sender, e);
+        }
 
         //Cells
 
@@ -713,5 +744,21 @@ namespace MauricioGarcia_GameOfLife
         //Grid x10
 
 
+        /*____________________Closing Settings____________________*/
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Update Settings
+            Properties.Settings.Default.Seed = value;
+            Properties.Settings.Default.BackgroundColor = panelColor;
+            Properties.Settings.Default.CellColor = cellColor;
+            Properties.Settings.Default.GridColor = gridColor;
+            Properties.Settings.Default.GridX10Color = LineX10Color;
+            Properties.Settings.Default.Timer = timer.Interval;
+            Properties.Settings.Default.Width = width;
+            Properties.Settings.Default.Height = height;
+
+            //Saving Update Settings
+            Properties.Settings.Default.Save();
+        }
     }
 }
