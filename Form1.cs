@@ -46,10 +46,20 @@ namespace MauricioGarcia_GameOfLife
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer not running
-            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
 
+            //Default Opening Settings
+            value = Properties.Settings.Default.Seed;
+            panelColor = Properties.Settings.Default.BackgroundColor;
+            cellColor = Properties.Settings.Default.CellColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            LineX10Color = Properties.Settings.Default.GridX10Color;
+            timer.Interval = Properties.Settings.Default.Timer;
+            width = Properties.Settings.Default.Width;
+            height = Properties.Settings.Default.Height;
+
+            //Millisecond Dysplay
+            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             //Seed Display
-            value = rndseed.Next(int.MinValue, int.MaxValue);
             toolStripStatusSeed.Text = "Seed = " + value.ToString();
         }
 
@@ -509,7 +519,7 @@ namespace MauricioGarcia_GameOfLife
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
                         //Randomize ( NOT COMPLETED )
-                        value = rndseed.Next(0, 2);
+                        rndseed.Next(0, 2);
                         if (value == 0)
                         {
                             universe[x1, y1] = true;
