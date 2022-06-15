@@ -188,6 +188,20 @@ namespace MauricioGarcia_GameOfLife
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 
+                    //Drawing Neighbor Count
+                    if (universe[x, y]==true)
+                    {
+                        Font font = new Font("Arial", 20f);
+
+                        StringFormat stringFormat = new StringFormat();
+                        stringFormat.Alignment = StringAlignment.Center;
+                        stringFormat.LineAlignment = StringAlignment.Center;
+
+                        int neighbors = 8;
+                        e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+                    }
+
+                    //Drawing the x10 Grid
                     if (x % 10 == 0)
                     {
                         int _y = universe.GetLength(1);
@@ -632,6 +646,7 @@ namespace MauricioGarcia_GameOfLife
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reset();
+
             value = Properties.Settings.Default.Seed;
             panelColor = Properties.Settings.Default.BackgroundColor;
             cellColor = Properties.Settings.Default.CellColor;
@@ -641,6 +656,13 @@ namespace MauricioGarcia_GameOfLife
             width = Properties.Settings.Default.Width;
             height = Properties.Settings.Default.Height;
 
+            universe = new bool[width, height];
+            generations = 0;
+            int live = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
+            toolStripStatusSeed.Text = "Seed = " + value.ToString();
+            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             graphicsPanel1.Invalidate();
         }
 
@@ -648,6 +670,7 @@ namespace MauricioGarcia_GameOfLife
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reload();
+
             value = Properties.Settings.Default.Seed;
             panelColor = Properties.Settings.Default.BackgroundColor;
             cellColor = Properties.Settings.Default.CellColor;
@@ -657,6 +680,13 @@ namespace MauricioGarcia_GameOfLife
             width = Properties.Settings.Default.Width;
             height = Properties.Settings.Default.Height;
 
+            universe = new bool[width, height];
+            generations = 0;
+            int live = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
+            toolStripStatusSeed.Text = "Seed = " + value.ToString();
+            toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             graphicsPanel1.Invalidate();
         }
 
@@ -672,7 +702,7 @@ namespace MauricioGarcia_GameOfLife
         //Neighbor Count
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         //Grid
