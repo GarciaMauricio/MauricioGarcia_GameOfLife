@@ -258,6 +258,10 @@ namespace MauricioGarcia_GameOfLife
                         e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum5, stringFormat);
                         e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum6, stringFormat);
                         e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum7, stringFormat);
+
+                        font.Dispose();
+                        numBrush.Dispose();
+                        stringFormat.Dispose();
                     }
 
                     //Drawing the x10 Grid
@@ -584,7 +588,7 @@ namespace MauricioGarcia_GameOfLife
                 {
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
-                        //Randomize ( NOT COMPLETED )
+                        //Randomize ( COMPLETED )
                         randomize = seedvalue.Next(0,2);
                         if (randomize == 0)
                         {
