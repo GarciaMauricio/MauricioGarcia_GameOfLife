@@ -13,12 +13,8 @@ namespace MauricioGarcia_GameOfLife
     public partial class Form1 : Form
     {
         //UniSize
-        static int width = 10;
-        static int height = 10;
-
-        //Seed
-        Random rndseed = new Random();
-        int value = 0;
+        static int width = Properties.Settings.Default.Width;
+        static int height = Properties.Settings.Default.Height;
 
         // The universe array
         bool[,] universe = new bool[width, height];
@@ -26,11 +22,14 @@ namespace MauricioGarcia_GameOfLife
         //Created ScratchPad here...
         bool[,] ScratchPad = new bool[width, height];
 
+        //Seed
+        int value = Properties.Settings.Default.Seed;
+
         // Drawing colors
-        Color panelColor = Color.White;
-        Color LineX10Color = Color.Black;
-        Color gridColor = Color.Black;
-        Color cellColor = Color.Black;
+        Color panelColor = Properties.Settings.Default.BackgroundColor;
+        Color LineX10Color = Properties.Settings.Default.GridX10Color;
+        Color gridColor = Properties.Settings.Default.GridColor;
+        Color cellColor = Properties.Settings.Default.CellColor;
 
         // The Timer class
         Timer timer = new Timer();
@@ -43,19 +42,9 @@ namespace MauricioGarcia_GameOfLife
             InitializeComponent();
 
             // Setup the timer
-            timer.Interval = 100; // milliseconds
+            timer.Interval = Properties.Settings.Default.Timer; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer not running
-
-            //Default Opening Settings
-            value = Properties.Settings.Default.Seed;
-            panelColor = Properties.Settings.Default.BackgroundColor;
-            cellColor = Properties.Settings.Default.CellColor;
-            gridColor = Properties.Settings.Default.GridColor;
-            LineX10Color = Properties.Settings.Default.GridX10Color;
-            timer.Interval = Properties.Settings.Default.Timer;
-            width = Properties.Settings.Default.Width;
-            height = Properties.Settings.Default.Height;
 
             //Millisecond Dysplay
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
@@ -513,13 +502,15 @@ namespace MauricioGarcia_GameOfLife
             {
                 value = sd.GetSeed();
 
+                Random newseed = new Random(value);
+
                 //Remember to always invalidate
                 for (int y1 = 0; y1 < universe.GetLength(1); y1++)
                 {
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
                         //Randomize ( NOT COMPLETED )
-                        rndseed.Next(0, 2);
+                        
                         if (value == 0)
                         {
                             universe[x1, y1] = true;
