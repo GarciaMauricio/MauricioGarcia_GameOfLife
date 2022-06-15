@@ -58,7 +58,7 @@ namespace MauricioGarcia_GameOfLife
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(152, 66);
+            this.numericUpDown1.Location = new System.Drawing.Point(141, 74);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -76,7 +76,7 @@ namespace MauricioGarcia_GameOfLife
             // SeedLabel
             // 
             this.SeedLabel.AutoSize = true;
-            this.SeedLabel.Location = new System.Drawing.Point(114, 69);
+            this.SeedLabel.Location = new System.Drawing.Point(103, 78);
             this.SeedLabel.Name = "SeedLabel";
             this.SeedLabel.Size = new System.Drawing.Size(32, 13);
             this.SeedLabel.TabIndex = 3;

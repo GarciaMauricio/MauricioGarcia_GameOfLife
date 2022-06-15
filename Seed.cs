@@ -23,9 +23,9 @@ namespace MauricioGarcia_GameOfLife
             return (int)numericUpDown1.Value;
         }
 
-        public void SetSeed(int Vseed)
+        public void SetSeed(int SeedValue)
         {
-            numericUpDown1.Value = Vseed /* num = seed number */ ;
+            numericUpDown1.Value = SeedValue /* num = seed number */ ;
         }
     }
 }

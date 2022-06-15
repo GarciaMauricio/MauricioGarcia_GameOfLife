@@ -563,7 +563,7 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________RANDOMIZE TAB____________________*/
-        //Seed
+        //From Seed
         private void seedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Seed sd = new Seed();
@@ -575,20 +575,22 @@ namespace MauricioGarcia_GameOfLife
             {
                 value = sd.GetSeed();
 
-                Random newseed = new Random(value);
-
+                Random seedvalue = new Random(value);
+                int randomize = 0;
                 //Remember to always invalidate
+
+                //Randomizing Universe with seed
                 for (int y1 = 0; y1 < universe.GetLength(1); y1++)
                 {
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
                         //Randomize ( NOT COMPLETED )
-                        
-                        if (value == 0)
+                        randomize = seedvalue.Next(0,2);
+                        if (randomize == 0)
                         {
                             universe[x1, y1] = true;
                         }
-                        else
+                        else if (randomize == 1 || randomize == 2)
                         {
                             universe[x1, y1] = false;
                         }
@@ -596,17 +598,19 @@ namespace MauricioGarcia_GameOfLife
                 }
                 toolStripStatusSeed.Text = "Seed = " + value.ToString();
             }
+            sd.Dispose();
             graphicsPanel1.Invalidate();
         }
 
+        //The Seed
+        private void theSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random NewSeed = new Random();
+            value = NewSeed.Next(int.MinValue, int.MaxValue);
 
-        //Current Seed
-
-
-
-        //Time
-
-
+            toolStripStatusSeed.Text = "Seed = " + value.ToString();
+            graphicsPanel1.Invalidate();
+        }
 
         /*____________________SETTINGS TAB____________________*/
         //Changing Background Color
