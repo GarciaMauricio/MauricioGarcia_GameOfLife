@@ -670,7 +670,10 @@ namespace MauricioGarcia_GameOfLife
 
 
         //Neighbor Count
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
 
         //Grid
         private void gridToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -736,13 +739,22 @@ namespace MauricioGarcia_GameOfLife
         }
 
         //Cells
-
+        private void cellsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cellsToolStripMenuItem1_Click(sender, e);
+        }
 
         //Grid
-
+        private void gridToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            gridToolStripMenuItem3_Click(sender, e);
+        }
 
         //Grid x10
-
+        private void gridX10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gridX10ToolStripMenuItem1_Click(sender, e);
+        }
 
         /*____________________Closing Settings____________________*/
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
