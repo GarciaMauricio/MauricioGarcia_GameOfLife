@@ -196,68 +196,13 @@ namespace MauricioGarcia_GameOfLife
                         Brush numBrush = new SolidBrush(numColor);
 
                         StringFormat stringFormat = new StringFormat();
-
                         stringFormat.Alignment = StringAlignment.Center;
                         stringFormat.LineAlignment = StringAlignment.Center;
 
-                        int neighbors = 1;
+                        Rectangle rect = new Rectangle(0,0,100,100);
+                        int neighbors = 8;
 
-                        RectangleF cellNum = RectangleF.Empty;
-                        cellNum.Width = cellWidth;
-                        cellNum.Height = cellHeight;
-                        cellNum.X = (x + 1) * cellWidth;
-                        cellNum.Y = (y - 1) * cellHeight;
-
-                        RectangleF cellNum1 = RectangleF.Empty;
-                        cellNum1.Width = cellWidth;
-                        cellNum1.Height = cellHeight;
-                        cellNum1.X = (x) * cellWidth;
-                        cellNum1.Y = (y - 1) * cellHeight;
-
-                        RectangleF cellNum2 = RectangleF.Empty;
-                        cellNum2.Width = cellWidth;
-                        cellNum2.Height = cellHeight;
-                        cellNum2.X = (x - 1) * cellWidth;
-                        cellNum2.Y = (y - 1) * cellHeight;
-
-                        RectangleF cellNum3 = RectangleF.Empty;
-                        cellNum3.Width = cellWidth;
-                        cellNum3.Height = cellHeight;
-                        cellNum3.X = (x - 1) * cellWidth;
-                        cellNum3.Y = (y) * cellHeight;
-
-                        RectangleF cellNum4 = RectangleF.Empty;
-                        cellNum4.Width = cellWidth;
-                        cellNum4.Height = cellHeight;
-                        cellNum4.X = (x - 1) * cellWidth;
-                        cellNum4.Y = (y + 1) * cellHeight;
-
-                        RectangleF cellNum5 = RectangleF.Empty;
-                        cellNum5.Width = cellWidth;
-                        cellNum5.Height = cellHeight;
-                        cellNum5.X = (x) * cellWidth;
-                        cellNum5.Y = (y + 1) * cellHeight;
-
-                        RectangleF cellNum6 = RectangleF.Empty;
-                        cellNum6.Width = cellWidth;
-                        cellNum6.Height = cellHeight;
-                        cellNum6.X = (x + 1) * cellWidth;
-                        cellNum6.Y = (y + 1) * cellHeight;
-
-                        RectangleF cellNum7 = RectangleF.Empty;
-                        cellNum7.Width = cellWidth;
-                        cellNum7.Height = cellHeight;
-                        cellNum7.X = (x + 1) * cellWidth;
-                        cellNum7.Y = (y) * cellHeight;
-
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum1, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum2, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum3, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum4, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum5, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum6, stringFormat);
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellNum7, stringFormat);
+                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, rect, stringFormat);
 
                         font.Dispose();
                         numBrush.Dispose();
