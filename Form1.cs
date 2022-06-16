@@ -543,9 +543,6 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________VIEW TAB____________________*/
-        //HUD View
-
-
         //Neighbor Count View
 
 
@@ -744,17 +741,6 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
-        //The Seed
-        private void theSeedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Random NewSeed = new Random();
-            value = NewSeed.Next(int.MinValue, int.MaxValue);
-
-            toolStripStatusSeed.Text = "Seed = " + value.ToString();
-            graphicsPanel1.Invalidate();
-        }
-
-
 
         /*____________________SETTINGS TAB____________________*/
         //Changing Background Color
@@ -910,9 +896,6 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________VIEW TAB____________________*/
-        //HUD
-
-
         //Neighbor Count
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {

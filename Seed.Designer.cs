@@ -33,6 +33,7 @@ namespace MauricioGarcia_GameOfLife
             this.Cancel = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.SeedLabel = new System.Windows.Forms.Label();
+            this.RandomizeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@ namespace MauricioGarcia_GameOfLife
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(141, 74);
+            this.numericUpDown1.Location = new System.Drawing.Point(101, 77);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -76,11 +77,21 @@ namespace MauricioGarcia_GameOfLife
             // SeedLabel
             // 
             this.SeedLabel.AutoSize = true;
-            this.SeedLabel.Location = new System.Drawing.Point(103, 78);
+            this.SeedLabel.Location = new System.Drawing.Point(63, 81);
             this.SeedLabel.Name = "SeedLabel";
             this.SeedLabel.Size = new System.Drawing.Size(32, 13);
             this.SeedLabel.TabIndex = 3;
             this.SeedLabel.Text = "Seed";
+            // 
+            // RandomizeButton
+            // 
+            this.RandomizeButton.Location = new System.Drawing.Point(227, 76);
+            this.RandomizeButton.Name = "RandomizeButton";
+            this.RandomizeButton.Size = new System.Drawing.Size(75, 23);
+            this.RandomizeButton.TabIndex = 4;
+            this.RandomizeButton.Text = "Randomize";
+            this.RandomizeButton.UseVisualStyleBackColor = true;
+            this.RandomizeButton.Click += new System.EventHandler(this.RandomizeButton_Click);
             // 
             // Seed
             // 
@@ -89,6 +100,7 @@ namespace MauricioGarcia_GameOfLife
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Cancel;
             this.ClientSize = new System.Drawing.Size(369, 195);
+            this.Controls.Add(this.RandomizeButton);
             this.Controls.Add(this.SeedLabel);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.Cancel);
@@ -111,5 +123,6 @@ namespace MauricioGarcia_GameOfLife
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label SeedLabel;
+        private System.Windows.Forms.Button RandomizeButton;
     }
 }

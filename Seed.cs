@@ -27,5 +27,12 @@ namespace MauricioGarcia_GameOfLife
         {
             numericUpDown1.Value = SeedValue /* num = seed number */ ;
         }
+
+        private void RandomizeButton_Click(object sender, EventArgs e)
+        {
+            Random NewSeed = new Random();
+            int ReplaceSeed = NewSeed.Next(int.MinValue, int.MaxValue);
+            SetSeed(ReplaceSeed);
+        }
     }
 }
