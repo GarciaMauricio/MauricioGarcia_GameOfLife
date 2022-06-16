@@ -300,7 +300,7 @@ namespace MauricioGarcia_GameOfLife
             //Displaying the HUD
             string HudDysplay = 
                 " Generation = " + generations + "\n"
-                + " Universe[" + width + ", " + height + "]" + "\n"
+                + " Universe [" + width + ", " + height + "]" + "\n"
                 + " Living Cells = " + live + "\n"
                 + neighbortype;
             RectangleF HudRect = RectangleF.Empty;
