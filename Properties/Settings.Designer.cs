@@ -118,5 +118,17 @@ namespace MauricioGarcia_GameOfLife.Properties {
                 this["Height"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Blue")]
+        public global::System.Drawing.Color NeighborCountColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NeighborCountColor"]));
+            }
+            set {
+                this["NeighborCountColor"] = value;
+            }
+        }
     }
 }

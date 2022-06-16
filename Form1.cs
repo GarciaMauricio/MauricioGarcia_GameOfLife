@@ -31,7 +31,7 @@ namespace MauricioGarcia_GameOfLife
         Color LineX10Color = Properties.Settings.Default.GridX10Color;
         Color gridColor = Properties.Settings.Default.GridColor;
         Color cellColor = Properties.Settings.Default.CellColor;
-        Color numColor = Color.Blue;
+        Color numColor = Properties.Settings.Default.NeighborCountColor;
         // The Timer class
         Timer timer = new Timer();
 
@@ -544,7 +544,20 @@ namespace MauricioGarcia_GameOfLife
 
         /*____________________VIEW TAB____________________*/
         //Neighbor Count View
-
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (optionsToolStripMenuItem.Checked == false)
+            {
+                neighborCountToolStripMenuItem.Checked = false;
+                numColor = Color.Transparent;
+            }
+            else
+            {
+                neighborCountToolStripMenuItem.Checked = true;
+                numColor = Color.Blue;
+            }
+            graphicsPanel1.Invalidate();
+        }
 
         //Grid View
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -812,6 +825,12 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+        //Changing Count Neighbors Color
+        private void neighborCountToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //Options Tab
         private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -853,6 +872,7 @@ namespace MauricioGarcia_GameOfLife
             timer.Interval = Properties.Settings.Default.Timer;
             width = Properties.Settings.Default.Width;
             height = Properties.Settings.Default.Height;
+            numColor = Properties.Settings.Default.NeighborCountColor;
 
             universe = new bool[width, height];
             generations = 0;
@@ -878,6 +898,7 @@ namespace MauricioGarcia_GameOfLife
             timer.Interval = Properties.Settings.Default.Timer;
             width = Properties.Settings.Default.Width;
             height = Properties.Settings.Default.Height;
+            numColor = Properties.Settings.Default.NeighborCountColor;
 
             universe = new bool[width, height];
             generations = 0;
@@ -897,9 +918,19 @@ namespace MauricioGarcia_GameOfLife
 
         /*____________________VIEW TAB____________________*/
         //Neighbor Count
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (neighborCountToolStripMenuItem.Checked == false)
+            {
+                optionsToolStripMenuItem.Checked = false;
+                numColor = Color.Transparent;
+            }
+            else
+            {
+                optionsToolStripMenuItem.Checked = true;
+                numColor = Color.Blue;
+            }
+            graphicsPanel1.Invalidate();
         }
 
 
@@ -987,6 +1018,13 @@ namespace MauricioGarcia_GameOfLife
         private void gridX10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gridX10ToolStripMenuItem1_Click(sender, e);
+        }
+
+
+        //Neighbors Count Color
+        private void neighborCountToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
         }
 
 
