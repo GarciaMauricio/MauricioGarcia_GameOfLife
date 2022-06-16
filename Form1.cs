@@ -52,6 +52,29 @@ namespace MauricioGarcia_GameOfLife
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             //Seed Display
             toolStripStatusSeed.Text = "Seed = " + value.ToString();
+
+            //Saved Settings for Grid and Neighbor Check Boxes
+            if (gridColor != Color.Transparent || gridColor != System.Drawing.Color.Transparent)
+            {
+                gridToolStripMenuItem.Checked = true;
+                gridToolStripMenuItem1.Checked = true;
+            }
+            else if (gridColor == Color.Transparent || gridColor == System.Drawing.Color.Transparent)
+            {
+                gridToolStripMenuItem.Checked = false;
+                gridToolStripMenuItem1.Checked = false;
+            }
+            if (numColor != Color.Transparent || numColor != System.Drawing.Color.Transparent)
+            {
+                optionsToolStripMenuItem.Checked = true;
+                neighborCountToolStripMenuItem.Checked = true;
+            }
+            else if (numColor == Color.Transparent || numColor == System.Drawing.Color.Transparent)
+            {
+                optionsToolStripMenuItem.Checked = false;
+                neighborCountToolStripMenuItem.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
         }
 
         // Calculate the next generation of cells
@@ -1095,7 +1118,7 @@ namespace MauricioGarcia_GameOfLife
             Properties.Settings.Default.Timer = timer.Interval;
             Properties.Settings.Default.Width = width;
             Properties.Settings.Default.Height = height;
-
+            Properties.Settings.Default.NeighborCountColor = numColor;
             //Saving Update Settings
             Properties.Settings.Default.Save();
         }
