@@ -189,26 +189,37 @@ namespace MauricioGarcia_GameOfLife
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 
-                    ////Drawing Neighbor Count
-                    //if (universe[x, y] == true)
-                    //{
-                    //    Font font = new Font("Arial", 20f);
 
-                    //    Brush numBrush = new SolidBrush(numColor);
 
-                    //    StringFormat stringFormat = new StringFormat();
-                    //    stringFormat.Alignment = StringAlignment.Center;
-                    //    stringFormat.LineAlignment = StringAlignment.Center;
+                    //_____________________________Drawing Neighbor Count_____________________________//
+                    Font font = new Font("Arial", 20f);
 
-                    //    Rectangle rect = new Rectangle(0, 0, 100, 100);
-                    //    int neighbors = 8;
+                    Brush numBrush = new SolidBrush(numColor);
 
-                    //    e.Graphics.DrawString(neighbors.ToString(), font, numBrush, rect, stringFormat);
+                    StringFormat stringFormat = new StringFormat();
+                    stringFormat.Alignment = StringAlignment.Center;
+                    stringFormat.LineAlignment = StringAlignment.Center;
 
-                    //    font.Dispose();
-                    //    numBrush.Dispose();
-                    //    stringFormat.Dispose();
-                    //}
+                    if (universe[x, y] == true)
+                    {
+                        int neighbors = CountNeighborsFinite(x, y); // default
+                        if (finiteToolStripMenuItem.Checked == true)
+                        {
+                            neighbors = CountNeighborsFinite(x, y);
+                        }
+                        else if (torisToolStripMenuItem.Checked == true)
+                        {
+                            neighbors = CountNeighborsToroidal(x, y);
+                        }
+
+                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellRect, stringFormat);
+                    }
+                    font.Dispose();
+                    numBrush.Dispose();
+                    stringFormat.Dispose();
+                    //________________________________________________________________________________//
+
+
 
                     //Drawing the x10 Grid
                     if (x % 10 == 0)
