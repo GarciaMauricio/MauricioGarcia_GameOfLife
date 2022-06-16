@@ -687,7 +687,10 @@ namespace MauricioGarcia_GameOfLife
                 value = sd.GetSeed();
 
                 Random seedvalue = new Random(value);
+
                 int randomize = 0;
+                int live = 0;
+
                 //Remember to always invalidate
 
                 //Randomizing Universe with seed
@@ -695,6 +698,7 @@ namespace MauricioGarcia_GameOfLife
                 {
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
+                        
                         //Randomize ( COMPLETED )
                         randomize = seedvalue.Next(0, 2);
                         if (randomize == 0)
@@ -705,12 +709,19 @@ namespace MauricioGarcia_GameOfLife
                         {
                             universe[x1, y1] = false;
                         }
+
+                        //Update Live Cells
+                        if (universe[x1, y1] == true)
+                        {
+                            live++;
+                        }
                     }
                 }
+                toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
                 toolStripStatusSeed.Text = "Seed = " + value.ToString();
+                graphicsPanel1.Invalidate();
+                sd.Dispose();
             }
-            sd.Dispose();
-            graphicsPanel1.Invalidate();
         }
 
 
