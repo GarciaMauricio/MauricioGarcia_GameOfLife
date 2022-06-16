@@ -87,6 +87,8 @@ namespace MauricioGarcia_GameOfLife
             this.gridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridX10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighborCountToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hUDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hUDToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsPanel1 = new MauricioGarcia_GameOfLife.GraphicsPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -170,6 +172,7 @@ namespace MauricioGarcia_GameOfLife
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hUDToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.gridToolStripMenuItem,
             this.toolStripSeparator3,
@@ -457,17 +460,18 @@ namespace MauricioGarcia_GameOfLife
             this.viewToolStripMenuItem,
             this.colorsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hUDToolStripMenuItem1,
             this.neighborCountToolStripMenuItem,
             this.gridToolStripMenuItem1,
             this.finiteToolStripMenuItemRight,
             this.toroidalToolStripMenuItemRight});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // neighborCountToolStripMenuItem
@@ -476,7 +480,7 @@ namespace MauricioGarcia_GameOfLife
             this.neighborCountToolStripMenuItem.CheckOnClick = true;
             this.neighborCountToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.neighborCountToolStripMenuItem.Name = "neighborCountToolStripMenuItem";
-            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.neighborCountToolStripMenuItem.Text = "Neighbor Count";
             this.neighborCountToolStripMenuItem.Click += new System.EventHandler(this.neighborCountToolStripMenuItem_Click);
             // 
@@ -486,7 +490,7 @@ namespace MauricioGarcia_GameOfLife
             this.gridToolStripMenuItem1.CheckOnClick = true;
             this.gridToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gridToolStripMenuItem1.Name = "gridToolStripMenuItem1";
-            this.gridToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.gridToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.gridToolStripMenuItem1.Text = "Grid";
             this.gridToolStripMenuItem1.Click += new System.EventHandler(this.gridToolStripMenuItem1_Click);
             // 
@@ -496,7 +500,7 @@ namespace MauricioGarcia_GameOfLife
             this.finiteToolStripMenuItemRight.CheckOnClick = true;
             this.finiteToolStripMenuItemRight.CheckState = System.Windows.Forms.CheckState.Checked;
             this.finiteToolStripMenuItemRight.Name = "finiteToolStripMenuItemRight";
-            this.finiteToolStripMenuItemRight.Size = new System.Drawing.Size(160, 22);
+            this.finiteToolStripMenuItemRight.Size = new System.Drawing.Size(180, 22);
             this.finiteToolStripMenuItemRight.Text = "Finite";
             this.finiteToolStripMenuItemRight.Click += new System.EventHandler(this.finiteToolStripMenuItemRight_Click);
             // 
@@ -504,7 +508,7 @@ namespace MauricioGarcia_GameOfLife
             // 
             this.toroidalToolStripMenuItemRight.CheckOnClick = true;
             this.toroidalToolStripMenuItemRight.Name = "toroidalToolStripMenuItemRight";
-            this.toroidalToolStripMenuItemRight.Size = new System.Drawing.Size(160, 22);
+            this.toroidalToolStripMenuItemRight.Size = new System.Drawing.Size(180, 22);
             this.toroidalToolStripMenuItemRight.Text = "Toroidal";
             this.toroidalToolStripMenuItemRight.Click += new System.EventHandler(this.toroidalToolStripMenuItemRight_Click);
             // 
@@ -554,6 +558,26 @@ namespace MauricioGarcia_GameOfLife
             this.neighborCountToolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
             this.neighborCountToolStripMenuItem2.Text = "Neighbor Count";
             this.neighborCountToolStripMenuItem2.Click += new System.EventHandler(this.neighborCountToolStripMenuItem2_Click);
+            // 
+            // hUDToolStripMenuItem
+            // 
+            this.hUDToolStripMenuItem.Checked = true;
+            this.hUDToolStripMenuItem.CheckOnClick = true;
+            this.hUDToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hUDToolStripMenuItem.Name = "hUDToolStripMenuItem";
+            this.hUDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hUDToolStripMenuItem.Text = "HUD";
+            this.hUDToolStripMenuItem.Click += new System.EventHandler(this.hUDToolStripMenuItem_Click);
+            // 
+            // hUDToolStripMenuItem1
+            // 
+            this.hUDToolStripMenuItem1.Checked = true;
+            this.hUDToolStripMenuItem1.CheckOnClick = true;
+            this.hUDToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hUDToolStripMenuItem1.Name = "hUDToolStripMenuItem1";
+            this.hUDToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.hUDToolStripMenuItem1.Text = "HUD";
+            this.hUDToolStripMenuItem1.Click += new System.EventHandler(this.hUDToolStripMenuItem1_Click);
             // 
             // graphicsPanel1
             // 
@@ -649,6 +673,8 @@ namespace MauricioGarcia_GameOfLife
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSeed;
         private System.Windows.Forms.ToolStripMenuItem neighborCountToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem neighborCountToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem hUDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hUDToolStripMenuItem1;
     }
 }
 

@@ -13,6 +13,7 @@ namespace MauricioGarcia_GameOfLife
 {
     public partial class Form1 : Form
     {
+
         //UniSize
         static int width = Properties.Settings.Default.Width;
         static int height = Properties.Settings.Default.Height;
@@ -33,6 +34,8 @@ namespace MauricioGarcia_GameOfLife
         Color gridColor = Properties.Settings.Default.GridColor;
         Color cellColor = Properties.Settings.Default.CellColor;
         Color numColor = Properties.Settings.Default.NeighborCountColor;
+        Color hudColor = Color.Red;
+        
         // The Timer class
         Timer timer = new Timer();
 
@@ -184,8 +187,22 @@ namespace MauricioGarcia_GameOfLife
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
 
+            //Font for the number inside the cell
+            Font font = new Font("Arial", 13f);
+
+            //Colors the number inside every cell
+            Brush numBrush = new SolidBrush(numColor);
+
+            //Formats number inside cell
+            StringFormat stringFormat = new StringFormat();
+
+
+            //HUD Brush
+            Brush hudBrush = new SolidBrush(hudColor);
+
             //Painting BackColor of the Panel
             graphicsPanel1.BackColor = panelColor;
+
 
             // Iterate through the universe in the y, top to bottom
             //started with y top then x on bottom, not necessary, this just moves through it the way westerns read
@@ -216,11 +233,6 @@ namespace MauricioGarcia_GameOfLife
 
 
                     //_____________________________Drawing Neighbor Count_____________________________//
-                    Font font = new Font("Arial", 20f);
-
-                    Brush numBrush = new SolidBrush(numColor);
-
-                    StringFormat stringFormat = new StringFormat();
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Center;
 
@@ -238,11 +250,8 @@ namespace MauricioGarcia_GameOfLife
 
                         e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellRect, stringFormat);
                     }
-                    font.Dispose();
-                    numBrush.Dispose();
-                    stringFormat.Dispose();
+                    
                     //________________________________________________________________________________//
-
 
 
                     //Drawing the x10 Grid
@@ -263,13 +272,52 @@ namespace MauricioGarcia_GameOfLife
                 }
             }
 
-            //HUD
+            //Updating Live Cells for the HUD
+            int live = 0;
+            for (int yPosition = 0; yPosition < universe.GetLength(1); yPosition++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int xPosition = 0; xPosition < universe.GetLength(0); xPosition++)
+                {
+                    if (universe[xPosition, yPosition] == true)
+                    {
+                        live++;
+                    }
+                }
+            }
+
+            //Updating the Count Neighbors View
+            string neighbortype = "";
+            if (finiteToolStripMenuItem.Checked == true || finiteToolStripMenuItemRight.Checked == true)
+            {
+                neighbortype = " Boundary Type = Finite";
+            }
+            else if(torisToolStripMenuItem.Checked == true || toroidalToolStripMenuItemRight.Checked == true)
+            {
+                neighbortype = " Boundary Type = Toroidal";
+            }
+
+            //Displaying the HUD
+            string HudDysplay = 
+                " Generation = " + generations + "\n"
+                + " Universe[" + width + ", " + height + "]" + "\n"
+                + " Living Cells = " + live + "\n"
+                + neighbortype;
+            RectangleF HudRect = RectangleF.Empty;
+            HudRect.X = 0;
+            HudRect.Y = ( graphicsPanel1.Height - 85);
+            HudRect.Width = graphicsPanel1.Width;
+            HudRect.Height = graphicsPanel1.Height;
+            e.Graphics.DrawString(HudDysplay.ToString(), font, hudBrush, HudRect);
 
 
             // Cleaning up pens and brushes
             gridPen.Dispose();
             boldPen.Dispose();
             cellBrush.Dispose();
+            font.Dispose();
+            numBrush.Dispose();
+            stringFormat.Dispose();
         }
 
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
@@ -567,6 +615,23 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________VIEW TAB____________________*/
+        //HUD View
+        private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hUDToolStripMenuItem.Checked == false)
+            {
+                hUDToolStripMenuItem1.Checked = false;
+                hudColor = Color.Transparent;
+            }
+            else
+            {
+                hUDToolStripMenuItem1.Checked = true;
+                hudColor = Color.Red;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+
         //Neighbor Count View
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -582,6 +647,7 @@ namespace MauricioGarcia_GameOfLife
             }
             graphicsPanel1.Invalidate();
         }
+
 
         //Grid View
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -994,6 +1060,23 @@ namespace MauricioGarcia_GameOfLife
 
 
         /*____________________VIEW TAB____________________*/
+        //HUD
+        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (hUDToolStripMenuItem1.Checked == false)
+            {
+                hUDToolStripMenuItem.Checked = false;
+                hudColor = Color.Transparent;
+            }
+            else
+            {
+                hUDToolStripMenuItem.Checked = true;
+                hudColor = Color.Red;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+
         //Neighbor Count
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
