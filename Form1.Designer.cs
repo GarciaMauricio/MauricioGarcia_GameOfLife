@@ -50,6 +50,7 @@ namespace MauricioGarcia_GameOfLife
             this.torisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.randomizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.theSeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +89,6 @@ namespace MauricioGarcia_GameOfLife
             this.gridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridX10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsPanel1 = new MauricioGarcia_GameOfLife.GraphicsPanel();
-            this.theSeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -127,7 +127,7 @@ namespace MauricioGarcia_GameOfLife
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -137,13 +137,14 @@ namespace MauricioGarcia_GameOfLife
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -151,18 +152,19 @@ namespace MauricioGarcia_GameOfLife
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -243,9 +245,16 @@ namespace MauricioGarcia_GameOfLife
             // seedToolStripMenuItem
             // 
             this.seedToolStripMenuItem.Name = "seedToolStripMenuItem";
-            this.seedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.seedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.seedToolStripMenuItem.Text = "From Seed";
             this.seedToolStripMenuItem.Click += new System.EventHandler(this.seedToolStripMenuItem_Click);
+            // 
+            // theSeedToolStripMenuItem
+            // 
+            this.theSeedToolStripMenuItem.Name = "theSeedToolStripMenuItem";
+            this.theSeedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.theSeedToolStripMenuItem.Text = "The Seed";
+            this.theSeedToolStripMenuItem.Click += new System.EventHandler(this.theSeedToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -367,6 +376,7 @@ namespace MauricioGarcia_GameOfLife
             this.Open.Size = new System.Drawing.Size(23, 22);
             this.Open.Text = "Open";
             this.Open.ToolTipText = "Open";
+            this.Open.Click += new System.EventHandler(this.Open_Click);
             // 
             // Save
             // 
@@ -376,6 +386,7 @@ namespace MauricioGarcia_GameOfLife
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(23, 22);
             this.Save.Text = "Save";
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // toolStripSeparator1
             // 
@@ -567,13 +578,6 @@ namespace MauricioGarcia_GameOfLife
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
-            // 
-            // theSeedToolStripMenuItem
-            // 
-            this.theSeedToolStripMenuItem.Name = "theSeedToolStripMenuItem";
-            this.theSeedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.theSeedToolStripMenuItem.Text = "The Seed";
-            this.theSeedToolStripMenuItem.Click += new System.EventHandler(this.theSeedToolStripMenuItem_Click);
             // 
             // Form1
             // 

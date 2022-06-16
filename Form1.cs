@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -177,7 +178,7 @@ namespace MauricioGarcia_GameOfLife
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
 
-                    
+
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -188,26 +189,26 @@ namespace MauricioGarcia_GameOfLife
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 
-                    //Drawing Neighbor Count
-                    if (universe[x, y] == true)
-                    {
-                        Font font = new Font("Arial", 20f);
+                    ////Drawing Neighbor Count
+                    //if (universe[x, y] == true)
+                    //{
+                    //    Font font = new Font("Arial", 20f);
 
-                        Brush numBrush = new SolidBrush(numColor);
+                    //    Brush numBrush = new SolidBrush(numColor);
 
-                        StringFormat stringFormat = new StringFormat();
-                        stringFormat.Alignment = StringAlignment.Center;
-                        stringFormat.LineAlignment = StringAlignment.Center;
+                    //    StringFormat stringFormat = new StringFormat();
+                    //    stringFormat.Alignment = StringAlignment.Center;
+                    //    stringFormat.LineAlignment = StringAlignment.Center;
 
-                        Rectangle rect = new Rectangle(0,0,100,100);
-                        int neighbors = 8;
+                    //    Rectangle rect = new Rectangle(0, 0, 100, 100);
+                    //    int neighbors = 8;
 
-                        e.Graphics.DrawString(neighbors.ToString(), font, numBrush, rect, stringFormat);
+                    //    e.Graphics.DrawString(neighbors.ToString(), font, numBrush, rect, stringFormat);
 
-                        font.Dispose();
-                        numBrush.Dispose();
-                        stringFormat.Dispose();
-                    }
+                    //    font.Dispose();
+                    //    numBrush.Dispose();
+                    //    stringFormat.Dispose();
+                    //}
 
                     //Drawing the x10 Grid
                     if (x % 10 == 0)
@@ -302,7 +303,17 @@ namespace MauricioGarcia_GameOfLife
 
 
         //Open Click
+        private void Open_Click(object sender, EventArgs e)
+        {
+            openToolStripMenuItem_Click(sender, e);
+        }
+
+
         //Save Click
+        private void Save_Click(object sender, EventArgs e)
+        {
+            saveToolStripMenuItem_Click(sender, e);
+        }
 
 
         //Start timer button( starts the timer to true, Line 35 )
@@ -350,10 +361,158 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
-
         //Open Button
-        //Import Button
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Created an Open file Dialog Box
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamReader reader = new StreamReader(dlg.FileName);
+
+                // Create a couple variables to calculate the width and height
+                // of the data in the file.
+                int maxWidth = 0;
+                int maxHeight = 0;
+                int yPos = 0;
+
+                // Iterate through the file once to get its size.
+                while (!reader.EndOfStream)
+                {
+                    // Read one row at a time.
+                    string row = reader.ReadLine();
+
+                    // If the row begins with '!' then it is a comment
+                    // and should be ignored.
+                    if (row[0] == '!')
+                    {
+                        continue;
+                    }
+
+                    // If the row is not a comment then it is a row of cells.
+                    // Increment the maxHeight variable for each row read.
+                    if (row[0] != '!')
+                    {
+                        maxHeight++;
+                    }
+
+                    // Get the length of the current row string
+                    // and adjust the maxWidth variable if necessary.
+                    if (maxWidth != row.Length)
+                    {
+                        maxWidth = row.Length;
+                    }
+                }
+
+                // Resize the current universe and scratchPad
+                // to the width and height of the file calculated above.
+                universe = new bool[maxWidth, maxHeight];
+                ScratchPad = new bool[maxWidth, maxHeight];
+
+                graphicsPanel1.Invalidate();
+
+                // Reset the file pointer back to the beginning of the file.
+                reader.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                // Iterate through the file again, this time reading in the cells.
+                while (!reader.EndOfStream)
+                {
+                    // Read one row at a time.
+                    string row = reader.ReadLine();
+
+                    // If the row begins with '!' then
+                    // it is a comment and should be ignored.
+                    if (row[0] == '!')
+                    {
+                        continue;
+                    }
+
+                    // If the row is not a comment then 
+                    // it is a row of cells and needs to be iterated through.
+                    if (row[0] != '!')
+                    {
+                        
+                        for (int xPos = 0; xPos < row.Length; xPos++)
+                        {
+                            // If row[xPos] is a 'O' (capital O) then
+                            // set the corresponding cell in the universe to alive.
+                            if (row[xPos] == 'O')
+                            {
+                                universe[xPos, yPos] = true;
+                            }
+
+                            // If row[xPos] is a '.' (period) then
+                            // set the corresponding cell in the universe to dead.
+                            if (row[xPos] == '.')
+                            {
+                                universe[xPos, yPos] = false;
+                            }
+                        }
+                        yPos++;
+                    }
+                }
+
+                // Close the file.
+                reader.Close();
+            }
+        }
+
+
         //Save Button
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Created Save File Dialog Box
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
+
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+
+
+                // Write any comments you want to include first.
+                // Prefix all comment strings with an exclamation point.
+                // Use WriteLine to write the strings to the file. 
+                // It appends a CRLF for you.
+                writer.WriteLine("!This is my comment.");
+                writer.WriteLine("!" + DateTime.Now);
+                // Iterate through the universe one row at a time.
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    // Create a string to represent the current row.
+                    String currentRow = string.Empty;
+
+                    // Iterate through the current row one cell at a time.
+                    for (int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        // If the universe[x,y] is alive then append 'O' (capital O)
+                        // to the row string.
+                        if (universe[x, y] == true)
+                        {
+                            currentRow += 'O';
+                        }
+                        // Else if the universe[x,y] is dead then append '.' (period)
+                        // to the row string.
+                        else if (universe[x, y] == false)
+                        {
+                            currentRow += '.';
+                        }
+                    }
+
+                    // Once the current row has been read through and the 
+                    // string constructed then write it to the file using WriteLine.
+                    writer.WriteLine(currentRow);
+                }
+
+                // After all rows and columns have been written then close the file.
+                writer.Close();
+            }
+        }
 
 
         //Exit Button
@@ -366,8 +525,10 @@ namespace MauricioGarcia_GameOfLife
 
         /*____________________VIEW TAB____________________*/
         //HUD View
-        
+
+
         //Neighbor Count View
+
 
         //Grid View
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -386,6 +547,7 @@ namespace MauricioGarcia_GameOfLife
             }
             graphicsPanel1.Invalidate();
         }
+
 
         //Finite View
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -534,7 +696,7 @@ namespace MauricioGarcia_GameOfLife
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
                         //Randomize ( COMPLETED )
-                        randomize = seedvalue.Next(0,2);
+                        randomize = seedvalue.Next(0, 2);
                         if (randomize == 0)
                         {
                             universe[x1, y1] = true;
@@ -551,6 +713,7 @@ namespace MauricioGarcia_GameOfLife
             graphicsPanel1.Invalidate();
         }
 
+
         //The Seed
         private void theSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -560,6 +723,8 @@ namespace MauricioGarcia_GameOfLife
             toolStripStatusSeed.Text = "Seed = " + value.ToString();
             graphicsPanel1.Invalidate();
         }
+
+
 
         /*____________________SETTINGS TAB____________________*/
         //Changing Background Color
@@ -582,6 +747,7 @@ namespace MauricioGarcia_GameOfLife
             BkGrnd.Dispose();
         }
 
+
         //Changing Cell Color
         private void cellsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -596,6 +762,7 @@ namespace MauricioGarcia_GameOfLife
             }
             cell.Dispose();
         }
+
 
         //Changing Grid Color
         private void gridToolStripMenuItem3_Click(object sender, EventArgs e)
@@ -612,6 +779,7 @@ namespace MauricioGarcia_GameOfLife
             grid.Dispose();
         }
 
+
         //Changing Grid x10 Color
         private void gridX10ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -626,6 +794,7 @@ namespace MauricioGarcia_GameOfLife
             }
             Gx10.Dispose();
         }
+
 
         //Options Tab
         private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -654,6 +823,7 @@ namespace MauricioGarcia_GameOfLife
             graphicsPanel1.Invalidate();
         }
 
+
         //Reset
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -677,6 +847,7 @@ namespace MauricioGarcia_GameOfLife
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             graphicsPanel1.Invalidate();
         }
+
 
         //Reload
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -703,6 +874,7 @@ namespace MauricioGarcia_GameOfLife
         }
 
 
+
         /*________________________________________RIGHT CLICK________________________________________*/
 
 
@@ -714,8 +886,9 @@ namespace MauricioGarcia_GameOfLife
         //Neighbor Count
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
+
 
         //Grid
         private void gridToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -735,6 +908,7 @@ namespace MauricioGarcia_GameOfLife
             graphicsPanel1.Invalidate();
         }
 
+
         //Finite
         private void finiteToolStripMenuItemRight_Click(object sender, EventArgs e)
         {
@@ -752,6 +926,7 @@ namespace MauricioGarcia_GameOfLife
             }
             graphicsPanel1.Invalidate();
         }
+
 
         //Toroidal
         private void toroidalToolStripMenuItemRight_Click(object sender, EventArgs e)
@@ -780,11 +955,13 @@ namespace MauricioGarcia_GameOfLife
             backgroundToolStripMenuItem1_Click(sender, e);
         }
 
+
         //Cells
         private void cellsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cellsToolStripMenuItem1_Click(sender, e);
         }
+
 
         //Grid
         private void gridToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -792,11 +969,14 @@ namespace MauricioGarcia_GameOfLife
             gridToolStripMenuItem3_Click(sender, e);
         }
 
+
         //Grid x10
         private void gridX10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gridX10ToolStripMenuItem1_Click(sender, e);
         }
+
+
 
         /*____________________Closing Settings____________________*/
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
