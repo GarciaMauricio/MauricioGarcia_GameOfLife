@@ -23,6 +23,7 @@ namespace MauricioGarcia_GameOfLife
         //Created ScratchPad here...
         bool[,] ScratchPad = new bool[width, height];
 
+
         //Seed
         int value = Properties.Settings.Default.Seed;
 
@@ -445,7 +446,7 @@ namespace MauricioGarcia_GameOfLife
                     // it is a row of cells and needs to be iterated through.
                     if (row[0] != '!')
                     {
-                        
+
                         for (int xPos = 0; xPos < row.Length; xPos++)
                         {
                             // If row[xPos] is a 'O' (capital O) then
@@ -727,7 +728,7 @@ namespace MauricioGarcia_GameOfLife
                 {
                     for (int x1 = 0; x1 < universe.GetLength(0); x1++)
                     {
-                        
+
                         //Randomize ( COMPLETED )
                         randomize = seedvalue.Next(0, 2);
                         if (randomize == 0)
@@ -828,7 +829,16 @@ namespace MauricioGarcia_GameOfLife
         //Changing Count Neighbors Color
         private void neighborCountToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ColorDialog NeighborNum = new ColorDialog();
 
+            NeighborNum.Color = numColor;
+
+            if (DialogResult.OK == NeighborNum.ShowDialog())
+            {
+                numColor = NeighborNum.Color;
+                graphicsPanel1.Invalidate();
+            }
+            NeighborNum.Dispose();
         }
 
         //Options Tab
@@ -874,7 +884,29 @@ namespace MauricioGarcia_GameOfLife
             height = Properties.Settings.Default.Height;
             numColor = Properties.Settings.Default.NeighborCountColor;
 
+            if (gridColor != Color.Transparent)
+            {
+                gridToolStripMenuItem.Checked = true;
+                gridToolStripMenuItem1.Checked = true;
+            }
+            else
+            {
+                gridToolStripMenuItem.Checked = false;
+                gridToolStripMenuItem1.Checked = false;
+            }
+            if (numColor != Color.Transparent)
+            {
+                optionsToolStripMenuItem.Checked = true;
+                neighborCountToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                optionsToolStripMenuItem.Checked = false;
+                neighborCountToolStripMenuItem.Checked = false;
+            }
             universe = new bool[width, height];
+            ScratchPad = new bool[width, height];
+            timer.Enabled = false;
             generations = 0;
             int live = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
@@ -900,7 +932,29 @@ namespace MauricioGarcia_GameOfLife
             height = Properties.Settings.Default.Height;
             numColor = Properties.Settings.Default.NeighborCountColor;
 
+            if (gridColor != Color.Transparent)
+            {
+                gridToolStripMenuItem.Checked = true;
+                gridToolStripMenuItem1.Checked = true;
+            }
+            else
+            {
+                gridToolStripMenuItem.Checked = false;
+                gridToolStripMenuItem1.Checked = false;
+            }
+            if (numColor != Color.Transparent)
+            {
+                optionsToolStripMenuItem.Checked = true;
+                neighborCountToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                optionsToolStripMenuItem.Checked = false;
+                neighborCountToolStripMenuItem.Checked = false;
+            }
             universe = new bool[width, height];
+            ScratchPad = new bool[width, height];
+            timer.Enabled = false;
             generations = 0;
             int live = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
@@ -1024,7 +1078,7 @@ namespace MauricioGarcia_GameOfLife
         //Neighbors Count Color
         private void neighborCountToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-
+            neighborCountToolStripMenuItem1_Click(sender, e);
         }
 
 
