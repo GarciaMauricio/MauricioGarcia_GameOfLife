@@ -378,7 +378,7 @@ namespace MauricioGarcia_GameOfLife
                 int maxWidth = 0;
                 int maxHeight = 0;
                 int yPos = 0;
-
+                int live = 0;
                 // Iterate through the file once to get its size.
                 while (!reader.EndOfStream)
                 {
@@ -450,10 +450,18 @@ namespace MauricioGarcia_GameOfLife
                             {
                                 universe[xPos, yPos] = false;
                             }
+
+                            //Update Live Cells
+                            if (universe[xPos, yPos] == true)
+                            {
+                                live++;
+                            }
                         }
                         yPos++;
                     }
                 }
+                toolStripStatusLabelAlive.Text = "Alive = " + live.ToString();
+                graphicsPanel1.Invalidate();
 
                 // Close the file.
                 reader.Close();
