@@ -55,28 +55,6 @@ namespace MauricioGarcia_GameOfLife
             toolStripStatusInterval.Text = "Interval = " + timer.Interval.ToString();
             //Seed Display
             toolStripStatusSeed.Text = "Seed = " + value.ToString();
-
-            //Saved Settings for Grid and Neighbor Check Boxes
-            if (gridColor != Color.Transparent || gridColor != System.Drawing.Color.Transparent)
-            {
-                gridToolStripMenuItem.Checked = true;
-                gridToolStripMenuItem1.Checked = true;
-            }
-            else if (gridColor == Color.Transparent || gridColor == System.Drawing.Color.Transparent)
-            {
-                gridToolStripMenuItem.Checked = false;
-                gridToolStripMenuItem1.Checked = false;
-            }
-            if (numColor != Color.Transparent || numColor != System.Drawing.Color.Transparent)
-            {
-                optionsToolStripMenuItem.Checked = true;
-                neighborCountToolStripMenuItem.Checked = true;
-            }
-            else if (numColor == Color.Transparent || numColor == System.Drawing.Color.Transparent)
-            {
-                optionsToolStripMenuItem.Checked = false;
-                neighborCountToolStripMenuItem.Checked = false;
-            }
             graphicsPanel1.Invalidate();
         }
 
@@ -643,7 +621,7 @@ namespace MauricioGarcia_GameOfLife
             else
             {
                 neighborCountToolStripMenuItem.Checked = true;
-                numColor = Color.Blue;
+                numColor = Properties.Settings.Default.NeighborCountColor;
             }
             graphicsPanel1.Invalidate();
         }
@@ -661,8 +639,8 @@ namespace MauricioGarcia_GameOfLife
             else
             {
                 gridToolStripMenuItem1.Checked = true;
-                LineX10Color = Color.Black;
-                gridColor = Color.Black;
+                LineX10Color = Properties.Settings.Default.GridX10Color;
+                gridColor = Properties.Settings.Default.GridColor;
             }
             graphicsPanel1.Invalidate();
         }
@@ -893,6 +871,7 @@ namespace MauricioGarcia_GameOfLife
             if (DialogResult.OK == grid.ShowDialog())
             {
                 gridColor = grid.Color;
+                Properties.Settings.Default.GridColor = gridColor;
                 graphicsPanel1.Invalidate();
             }
             grid.Dispose();
@@ -909,6 +888,7 @@ namespace MauricioGarcia_GameOfLife
             if (DialogResult.OK == Gx10.ShowDialog())
             {
                 LineX10Color = Gx10.Color;
+                Properties.Settings.Default.GridX10Color = LineX10Color;
                 graphicsPanel1.Invalidate();
             }
             Gx10.Dispose();
@@ -925,6 +905,7 @@ namespace MauricioGarcia_GameOfLife
             if (DialogResult.OK == NeighborNum.ShowDialog())
             {
                 numColor = NeighborNum.Color;
+                Properties.Settings.Default.NeighborCountColor = numColor;
                 graphicsPanel1.Invalidate();
             }
             NeighborNum.Dispose();
@@ -1088,7 +1069,7 @@ namespace MauricioGarcia_GameOfLife
             else
             {
                 optionsToolStripMenuItem.Checked = true;
-                numColor = Color.Blue;
+                numColor = Properties.Settings.Default.NeighborCountColor;
             }
             graphicsPanel1.Invalidate();
         }
@@ -1106,8 +1087,8 @@ namespace MauricioGarcia_GameOfLife
             else
             {
                 gridToolStripMenuItem.Checked = true;
-                LineX10Color = Color.Black;
-                gridColor = Color.Black;
+                LineX10Color = Properties.Settings.Default.GridX10Color;
+                gridColor = Properties.Settings.Default.GridColor;
             }
             graphicsPanel1.Invalidate();
         }
@@ -1192,6 +1173,12 @@ namespace MauricioGarcia_GameOfLife
         /*____________________Closing Settings____________________*/
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //Preventing Transparent Default values if Windows Application Closed
+            //when the grid and neighbor count were set to not visible
+            numColor = Properties.Settings.Default.NeighborCountColor;
+            LineX10Color = Properties.Settings.Default.GridX10Color;
+            gridColor = Properties.Settings.Default.GridColor;
+
             //Update Settings
             Properties.Settings.Default.Seed = value;
             Properties.Settings.Default.BackgroundColor = panelColor;
