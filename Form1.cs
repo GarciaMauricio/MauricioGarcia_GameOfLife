@@ -213,8 +213,8 @@ namespace MauricioGarcia_GameOfLife
                     //_____________________________Drawing Neighbor Count_____________________________//
                     stringFormat.Alignment = StringAlignment.Center;
                     stringFormat.LineAlignment = StringAlignment.Center;
-
-                    if (universe[x, y] == true)
+                    
+                    if (universe[x,y] == true)
                     {
                         int neighbors = CountNeighborsFinite(x, y); // default
                         if (finiteToolStripMenuItem.Checked == true)
@@ -225,7 +225,6 @@ namespace MauricioGarcia_GameOfLife
                         {
                             neighbors = CountNeighborsToroidal(x, y);
                         }
-
                         e.Graphics.DrawString(neighbors.ToString(), font, numBrush, cellRect, stringFormat);
                     }
                     
